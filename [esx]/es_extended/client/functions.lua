@@ -339,7 +339,7 @@ ESX.Game.Teleport = function(entity, coords, cb)
 end
 
 ESX.Game.SpawnObject = function(object, coords, cb, networked)
-	local model = (type(object) == 'number' and model or GetHashKey(object))
+	local model = (type(object) == 'number' and object or GetHashKey(object))
 	local vector = type(coords) == "vector3" and coords or vec(coords.x, coords.y, coords.z)
 	networked = networked == nil and true or networked
 
@@ -348,7 +348,7 @@ ESX.Game.SpawnObject = function(object, coords, cb, networked)
 
 		-- The below has to be done just for CreateObject since for some reason CreateObjects model argument is set
 		-- as an Object instead of a hash so it doesn't automatically hash the item
-		model = type(model) == 'number' and model or GetHashKey(model)
+		-- model = type(model) == 'number' and model or GetHashKey(model)
 		local obj = CreateObject(model, vector.xyz, networked, false, true)
 		if cb then
 			cb(obj)
